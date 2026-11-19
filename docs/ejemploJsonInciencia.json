@@ -1,0 +1,8 @@
+{
+  "cif_empresa": "B12345678",
+  "creador": 1,
+  "tecnico": 3,
+  "tipo": 2,
+  "descripcion": "El ordenador del departamento de administración no arranca.",
+  "prioridad": "alta"
+}
