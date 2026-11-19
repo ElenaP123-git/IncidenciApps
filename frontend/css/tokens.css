@@ -1,0 +1,42 @@
+/* IncidenciApp */
+
+:root {
+  /* Colores */
+  --color-fondo: #f8f6f2;
+  --color-superficie: #ffffff;
+  --color-borde: #e6e0d8;
+  --color-texto: #302e2a;
+  --color-texto-suave: #777169;
+  --color-texto-tenue: #a09a91;
+
+  --color-primario: #ad5944;
+  --color-primario-suave: #f5e6df;
+  --color-primario-hover: #9a4b38;      /* (*) */
+
+  --color-verde: #397a77;
+  --color-verde-suave: #e5efeb;
+  --color-ambar: #96702c;
+  --color-ambar-suave: #f6eedc;
+  --color-neutro-suave: #f0ebe3;
+
+  --color-vacio: #f4f0ea;
+  --color-borde-vacio: #d8c8bd;
+
+  --color-error: #b3382c;               /* (*) Figma no tiene estado de error */
+  --color-error-suave: #fbeae7;         /* (*) */
+
+  /* Tipografía */
+  --fuente: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Radios */
+  --radio-campo: 10px;
+  --radio-tarjeta: 16px;
+  --radio-pildora: 100px;
+
+  /* Sombra de tarjeta */
+  --sombra-tarjeta: 0 12px 40px rgba(66, 56, 41, 0.04);
+
+  /* Tamaños de controles */
+  --alto-boton: 50px;
+  --alto-campo: 54px;
+}

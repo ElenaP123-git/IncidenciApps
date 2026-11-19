@@ -1,0 +1,295 @@
+/* IncidenciApp · Componentes reutilizables */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.icono {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icono[hidden] { display: none; }   
+
+/* Botones */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: var(--alto-boton);
+  padding: 0 20px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-campo);
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  font: 600 14px/1.5 var(--fuente);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s, border-color .15s, box-shadow .15s;
+}
+
+.btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--color-primario-suave), 0 0 0 4px var(--color-primario);
+}
+
+/* Principal */
+.btn--principal {
+  background: var(--color-primario);
+  border-color: var(--color-primario);
+  color: #ffffff;
+}
+.btn--principal:hover { background: var(--color-primario-hover); border-color: var(--color-primario-hover); }
+
+/* Secundario */
+.btn--secundario:hover { background: var(--color-fondo); }
+
+/* Desactivado (*) */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  background: var(--color-neutro-suave);
+  border-color: var(--color-borde);
+  color: var(--color-texto-tenue);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Campos (texto, contraseña, desplegable) */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.campo__etiqueta {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-texto);
+}
+
+.campo__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: var(--alto-campo);
+  padding: 0 16px;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-campo);
+  color: var(--color-texto-tenue);          /* color de los iconos */
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.campo__control:focus-within {              /* (*) */
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px var(--color-primario-suave);
+}
+
+.campo__entrada {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--color-texto);
+  font: 400 14px/1.5 var(--fuente);
+}
+.campo__entrada::placeholder { color: var(--color-texto-tenue); }
+
+.campo__accion {                            /* ojo de la contraseña */
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-texto-tenue);
+  cursor: pointer;
+}
+.campo__accion:hover { color: var(--color-texto-suave); }
+.campo__accion:focus-visible { outline: 2px solid var(--color-primario); outline-offset: 2px; border-radius: 4px; }
+
+/* Desplegable */
+.campo__select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 28px;
+  cursor: pointer;
+}
+.campo__chevron {
+  position: absolute;
+  right: 16px;
+  width: 16px;
+  height: 16px;
+  color: var(--color-texto-suave);
+  pointer-events: none;
+}
+
+.campo__ayuda {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-texto-suave);
+}
+
+.campo__error {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-error);                /* (*) */
+}
+.campo__error .icono { width: 14px; height: 14px; }
+
+.campo--error .campo__control { border-color: var(--color-error); }
+.campo--error .campo__control:focus-within { box-shadow: 0 0 0 3px var(--color-error-suave); }
+.campo--error .campo__error { display: flex; }
+.campo--error .campo__ayuda { display: none; }
+
+/* Campo no editable (rol, empresa…) (*) */
+.campo--bloqueado .campo__control { background: var(--color-fondo); }
+.campo--bloqueado .campo__entrada { color: var(--color-texto-suave); cursor: not-allowed; }
+
+/* Tarjeta principal (empresa) */
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 349px;
+  max-width: 100%;
+  min-height: 290px;
+  padding: 28px;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-tarjeta);
+  box-shadow: var(--sombra-tarjeta);
+}
+
+.tarjeta__identidad {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.tarjeta__simbolo {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radio-tarjeta);
+  background: var(--color-primario-suave);
+  color: var(--color-primario);
+}
+.tarjeta__simbolo .icono { width: 28px; height: 28px; }
+.tarjeta__simbolo--verde { background: var(--color-verde-suave); color: var(--color-verde); }
+
+.tarjeta__tipo {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: var(--color-texto-tenue);
+}
+
+.tarjeta__info { display: flex; flex-direction: column; gap: 10px; }
+
+.tarjeta__nombre {
+  margin: 0;
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  color: var(--color-texto);
+}
+
+.tarjeta__descripcion {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-texto-suave);
+}
+
+.tarjeta__acceso {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-borde);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primario);
+  text-decoration: none;
+}
+.tarjeta__acceso:hover { color: var(--color-primario-hover); }
+.tarjeta__acceso:focus-visible { outline: 2px solid var(--color-primario); outline-offset: 4px; border-radius: 4px; }
+
+/* Tarjeta "añadir" */
+.tarjeta--añadir {
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  background: var(--color-vacio);
+  border-color: var(--color-borde-vacio);
+  box-shadow: none;
+  text-decoration: none;
+}
+.tarjeta--añadir .tarjeta__simbolo {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radio-pildora);
+  background: var(--color-superficie);
+}
+.tarjeta--añadir .icono { width: 24px; height: 24px; }
+.tarjeta__accion { font-size: 17px; font-weight: 600; color: var(--color-primario); }
+.tarjeta--añadir .tarjeta__descripcion { max-width: 220px; }
+
+/* Etiquetas de estado / prioridad */
+
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: var(--radio-pildora);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  background: var(--color-neutro-suave);
+  color: var(--color-texto-suave);
+}
+.etiqueta::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.etiqueta--alta  { background: var(--color-primario-suave); color: var(--color-primario); }
+.etiqueta--media { background: var(--color-ambar-suave);    color: var(--color-ambar); }
+.etiqueta--baja  { background: var(--color-verde-suave);    color: var(--color-verde); }

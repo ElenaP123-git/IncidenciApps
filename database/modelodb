@@ -1,0 +1,104 @@
+CREATE TABLE IF NOT EXISTS Empresa (
+    cif VARCHAR(20) PRIMARY KEY,
+    nombre VARCHAR(150) NOT NULL,
+    fecha_alta DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+-- TABLA: Usuario
+
+CREATE TABLE IF NOT EXISTS Usuario (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    cif VARCHAR(20) NOT NULL,
+    nombre VARCHAR(150) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    rol VARCHAR(30) NOT NULL,
+
+    CONSTRAINT fk_usuario_empresa
+        FOREIGN KEY (cif)
+        REFERENCES Empresa(cif)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+
+-- TABLA: Tipo_Incidencia
+
+CREATE TABLE IF NOT EXISTS Tipo_Incidencia (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    cif VARCHAR(20) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+
+    CONSTRAINT fk_tipo_empresa
+        FOREIGN KEY (cif)
+        REFERENCES Empresa(cif)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    CONSTRAINT uq_tipo_empresa_nombre
+        UNIQUE (cif, nombre)
+);
+
+-- TABLA: Incidencia
+
+
+CREATE TABLE IF NOT EXISTS Incidencia (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+
+    cif_empresa VARCHAR(20) NOT NULL,
+    creador INTEGER NOT NULL,
+    tecnico INTEGER,
+    tipo INTEGER NOT NULL,
+
+    descripcion TEXT NOT NULL,
+    estado VARCHAR(30) NOT NULL DEFAULT 'abierta',
+    fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    prioridad VARCHAR(20) NOT NULL DEFAULT 'media',
+
+    CONSTRAINT fk_incidencia_empresa
+        FOREIGN KEY (cif_empresa)
+        REFERENCES Empresa(cif)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    CONSTRAINT fk_incidencia_creador
+        FOREIGN KEY (creador)
+        REFERENCES Usuario(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    CONSTRAINT fk_incidencia_tecnico
+        FOREIGN KEY (tecnico)
+        REFERENCES Usuario(id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL,
+
+    CONSTRAINT fk_incidencia_tipo
+        FOREIGN KEY (tipo)
+        REFERENCES Tipo_Incidencia(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+-- TABLA: Comentario
+
+CREATE TABLE IF NOT EXISTS Comentario (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+
+    incidencia INTEGER NOT NULL,
+    autor INTEGER NOT NULL,
+    texto TEXT NOT NULL,
+    fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_comentario_incidencia
+        FOREIGN KEY (incidencia)
+        REFERENCES Incidencia(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_comentario_autor
+        FOREIGN KEY (autor)
+        REFERENCES Usuario(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
