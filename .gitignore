@@ -1,0 +1,84 @@
+
+# ==========================================
+# DEPENDENCIAS
+# ==========================================
+
+# Node.js / Express
+backend/node_modules/
+node_modules/
+
+# Angular
+frontend/node_modules/
+
+
+# ==========================================
+# VARIABLES DE ENTORNO Y SECRETOS
+# ==========================================
+
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# ==========================================
+# ANGULAR / BUILD
+# ==========================================
+
+frontend/dist/
+frontend/out-tsc/
+frontend/.angular/
+frontend/coverage/
+
+# ==========================================
+# NODE.JS
+# ==========================================
+
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==========================================
+# LOGS
+# ==========================================
+
+logs/
+*.log
+
+# ==========================================
+# TESTING
+# ==========================================
+
+coverage/
+.nyc_output/
+
+# ==========================================
+# ARCHIVOS TEMPORALES
+# ==========================================
+
+*.tmp
+*.temp
+*.swp
+*.bak
+
+# ==========================================
+# BASE DE DATOS - POSTGRESQL
+# ==========================================
+
+# Backups y volcados
+*.sql
+*.dump
+*.backup
+*.bak
+
+# Archivos temporales de PostgreSQL
+*.pid
+*.log
+
+
+# ==========================================
+# BACKEND / TYPESCRIPT (si aplica)
+# ==========================================
+
+backend/dist/
+backend/build/
